@@ -20,10 +20,10 @@ public class typeimageController {
     @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
     public Result uploadImg(@RequestParam MultipartFile image, HttpServletRequest request) throws IOException {
         //1：密钥，这里写问们上面的密钥
-        final String AK = "qqJ8sTmXU4E9jFhmUQXeasc2jHuEN22BmVXfOvRZ";
-        final String SK = "4iqB8Y9H0-Y8M94TOptfEorU35iLNarbA-5l5FRW";
+        final String AK = "";
+        final String SK = "";
         //2：指定工作空间，也就我我们上面创建的存储空间
-        final String BUCKET = "shangnanjie";
+        final String BUCKET = "";
         byte[] bytes = image.getBytes();
         Auth auth =Auth.create(AK,SK);
         String token = auth.uploadToken(BUCKET);
