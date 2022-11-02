@@ -1,0 +1,12 @@
+server:
+  port: 4431
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+file:
+  image:
+    path: /home/java/image
+    path2: E:\nolaAitage词条\image
+    pathsamll: /home/java/imagesamll
