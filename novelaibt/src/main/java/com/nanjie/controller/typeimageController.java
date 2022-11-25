@@ -23,7 +23,7 @@ public class typeimageController {
         final String AK = "";
         final String SK = "";
         //2：指定工作空间，也就我我们上面创建的存储空间
-        final String BUCKET = "";
+        final String BUCKET = "shangnanjie";
         byte[] bytes = image.getBytes();
         Auth auth =Auth.create(AK,SK);
         String token = auth.uploadToken(BUCKET);

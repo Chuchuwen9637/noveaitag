@@ -8,7 +8,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
-    password: abc12345
+    password: 1234
     url: jdbc:mysql://127.0.0.1:3306/aitag
     type: com.alibaba.druid.pool.DruidDataSource
 mybatis-plus:

@@ -1,6 +1,11 @@
 package com.nanjie.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nanjie.common.Result;
 import com.nanjie.common.typeListDTO;
 import com.nanjie.entity.Totaltype;
@@ -51,11 +56,16 @@ public class TypelistController {
     //返回模糊查询切分页的所有内容
     @RequestMapping("typelist_page_name")
     public Result find_page_list_byname(@RequestBody typeList_vo vo){
-        System.out.println(vo);
+      /*  System.out.println(vo);
         int page=(vo.getVal()-1)*15;
         vo.setPage(page);
-        vo.setMaxlimitl(15);
+        vo.setMaxlimitl(15);*/
+        LambdaQueryWrapper<Typelist> wrapper= Wrappers.<Typelist>lambdaQuery();
 
-        return Result.ok(200,"查询"+vo.getName(),typelistService.select_litem(vo));
+        if (StringUtils.isNotBlank(vo.getName())){
+            wrapper.like(Typelist::getChinesename,vo.getName());
+        }
+        Page<Typelist> list=typelistMapper.selectPage(new Page<>(vo.getVal(),15),wrapper);
+        return Result.ok(200,"查询",list);
     }
 }
