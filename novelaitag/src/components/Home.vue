@@ -61,6 +61,7 @@
   </el-submenu>
   <el-menu-item-group>
           <el-menu-item @click="router_i()">大魔法师</el-menu-item>
+          <el-menu-item @click="setbooks('https://www.iaidraw.com/')">AI 绘画</el-menu-item>
           <el-menu-item @click="showaddtag()">4万TAG集合</el-menu-item>
           <el-menu-item  @click="gievmoney()">谢谢你们喜欢</el-menu-item>
         </el-menu-item-group>

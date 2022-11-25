@@ -29,21 +29,21 @@
     </el-form>
     </el-dialog>
 
-  <el-row>
-  <el-col :span="5" v-for="items in getauthortag"  :offset="1" lazy>
-    <el-card :body-style="{ padding: '0px' }">
-      <el-image   style="width: 100px; height: 100px;"  :preview-src-list="srcList" :src="items.url" class="image"></el-image>
+  <el-row >
+  <el-col  :span="5" v-for="items in getauthortag"  :offset="1" lazy >
+    <el-card :body-style="{ padding: '0px'}">
+      <el-image  :preview-src-list="srcList" :src="items.url" class="image"></el-image>
       <div style="padding: 14px;">
         <span>作者：{{items.author}}</span>
         <div class="bottom clearfix">
-          <el-button type="primary" icon="el-icon-copy-document" @click="copyTag(items.tag)" >TAG</el-button>
-          <el-button type="text" class="button" @click="copyTag(items.negativetag)">负面TAG</el-button>
+          <el-button type="primary" icon="el-icon-copy-document" @click="copyTag(items.tag)" ></el-button>
+         <el-button type="primary"    icon="el-icon-download" @click="onhandddd(items.url)">原图</el-button>
+          <el-button type="text" class="button" @click="copyTag(items.negativetag)">负TAG</el-button>
         </div>
       </div>
     </el-card>
   </el-col>
 </el-row>
-
 
 
 </el-dialog >
@@ -82,6 +82,11 @@
       };
     },
     methods: {
+      onhandddd(url){
+        let dd='http://tomxlysplay.com.cn:4431/down/'
+        let urlname=url.slice(dd.length,100);
+       window.location.href='http://tomxlysplay.com.cn:4431/downbig/'+urlname
+      },
       copyTag(value){
         console.log("复制id", value);
             let eInput = document.createElement("input");
@@ -137,6 +142,22 @@
   };
 </script>
 <style>
+.bottom clearfix{
+  display: flex;
+}
+.el-row.is-justify-center {
+    justify-content: center;
+}
+.el-image {
+ height:250px;
+ width: 250px;
+}
+.el-row {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    box-sizing: border-box;
+}
 .el-image__error, .el-image__inner, .el-image__placeholder{
   object-fit: contain;
 }
@@ -176,4 +197,5 @@ background-attachment:fixed;
   .clearfix:after {
       clear: both
   }
+
 </style>
