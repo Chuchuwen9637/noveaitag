@@ -12,10 +12,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.UUID;
 
 @RestController
@@ -64,14 +62,21 @@ public class imageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return Result.ok(200,"图片上传成功",httspath+filename);
     }
     @RequestMapping("/down/{filename}")
     public void downimage(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) throws IOException {
         FileInputStream is = new FileInputStream(new File(imagesamll, filename));
         ServletOutputStream os = response.getOutputStream();
+        IOUtils.copy(is,os);
+        IOUtils.closeQuietly(is);
+        IOUtils.closeQuietly(os);
+    }
+    @RequestMapping("/downbig/{filename}")
+    public  void downbigimage(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        FileInputStream is = new FileInputStream(new File(imagePath, filename));
+        ServletOutputStream os = response.getOutputStream();
+        response.setHeader("content-disposition","attachment;fileName="+ URLEncoder.encode(filename,"UTF-8"));
         IOUtils.copy(is,os);
         IOUtils.closeQuietly(is);
         IOUtils.closeQuietly(os);
